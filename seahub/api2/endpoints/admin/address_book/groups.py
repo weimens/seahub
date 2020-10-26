@@ -127,34 +127,6 @@ class AdminAddressBookGroup(APIView):
     throttle_classes = (UserRateThrottle,)
     permission_classes = (IsAdminUser, IsProVersion)
 
-    def _get_address_book_group_memeber_info(self, request, group_member_obj, avatar_size):
-
-        email = group_member_obj.user_name
-        avatar_url, is_default, date_uploaded = api_avatar_url(email, avatar_size)
-
-        group_id = group_member_obj.group_id
-        group = ccnet_api.get_group(group_member_obj.group_id)
-
-        role = 'Member'
-        is_admin = bool(group_member_obj.is_staff)
-        if email == group.creator_name:
-            role = 'Owner'
-        elif is_admin:
-            role = 'Admin'
-
-        member_info = {
-            'group_id': group_id,
-            'group_name': group.group_name,
-            'email': email,
-            "name": email2nickname(email),
-            "contact_email": email2contact_email(email),
-            "avatar_url": avatar_url,
-            "is_admin": is_admin,
-            "role": role,
-        }
-
-        return member_info
-
     def get(self, request, group_id):
         """List child groups and members in an address book group."""
         group_id = int(group_id)
