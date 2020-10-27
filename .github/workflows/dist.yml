@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - "7.1"
+      - onlyoffice-desktop-editor
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
