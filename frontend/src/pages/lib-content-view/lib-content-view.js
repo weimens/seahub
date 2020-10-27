@@ -1182,7 +1182,7 @@ class LibContentView extends React.Component {
             type: 'word',
             provider: 'Seafile',
           };
-          window.AscDesktopEditor.execCommand('open:document', JSON.stringify(params));
+          window.AscDesktopEditor.execCommand('document:open', JSON.stringify(params));
         } else {
           console.log(2)
           location.href = url;
