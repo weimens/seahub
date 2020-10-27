@@ -1,5 +1,6 @@
 {% extends "base_for_react.html" %}
 {% load render_bundle from webpack_loader %}
+{% load seahub_tags %}
 
 {% block extra_style %}
 {% render_bundle 'app' 'css' %}
@@ -15,6 +16,13 @@
     uploadLinkExpireDaysMin: {{ upload_link_expire_days_min }},
     uploadLinkExpireDaysMax: {{ upload_link_expire_days_max }}
   });
+  let params = {
+    "displayName": "{{request.user.username|email2nickname|escapejs}}",
+    "email": "{{request.user.username|escapejs}}",
+    "domain": "{{service_url}}",
+    "provider": "Seafile"
+  }
+  window.AscDesktopEditor.execCommand('portal:login', JSON.stringify(params));
 </script>
 {% render_bundle 'app' 'js' %}
 {% endblock %}

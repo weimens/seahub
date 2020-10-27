@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cookie from 'react-cookies';
 import moment from 'moment';
-import { gettext, siteRoot, username, isDocs } from '../../utils/constants';
+import { gettext, siteRoot, serviceURL, username, isDocs } from '../../utils/constants';
 import { seafileAPI } from '../../utils/seafile-api';
 import { Utils } from '../../utils/utils';
 import collabServer from '../../utils/collab-server';
@@ -1173,12 +1173,18 @@ class LibContentView extends React.Component {
         this.showColumnMarkdownFile(direntPath);
       } else {
         const url = siteRoot + 'lib/' + repoID + '/file' + Utils.encodePath(direntPath);
-        
         let isWeChat = Utils.isWeChat();
         if (!isWeChat) {
-          let newWindow = window.open('about:blank');
-          newWindow.location.href = url;
+          let file_ext = url.substr(url.lastIndexOf('.') + 1).toLowerCase();
+          console.log(1)
+          let params = {
+            url: serviceURL + url,
+            type: 'word',
+            provider: 'Seafile',
+          };
+          window.AscDesktopEditor.execCommand('open:document', JSON.stringify(params));
         } else {
+          console.log(2)
           location.href = url;
         }
       }
