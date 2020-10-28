@@ -1178,11 +1178,11 @@ class LibContentView extends React.Component {
           let file_ext = url.substr(url.lastIndexOf('.') + 1).toLowerCase();
           console.log(1)
           let params = {
-            url: serviceURL + url,
-            type: 'word',
-            provider: 'Seafile',
+            "url": serviceURL + url,
+            "type": 'word',
+            "provider": 'Seafile',
           };
-          window.AscDesktopEditor.execCommand('document:open', JSON.stringify(params));
+          window.AscDesktopEditor.execCommand('open:document', JSON.stringify(params));
         } else {
           console.log(2)
           location.href = url;
