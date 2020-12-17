@@ -53,6 +53,9 @@ html, body { padding:0; margin:0; height:100%; }
     };
     var docEditor = new DocsAPI.DocEditor("placeholder", config);
 </script>
-{% include 'snippets/wopi_onlyoffice_js.html' %}
+{% if enable_watermark %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/watermark.js"></script>
+<script type="text/javascript">{% include "snippets/add_watermark.html" %}</script>
+{% endif %}
 </body>
 </html>
